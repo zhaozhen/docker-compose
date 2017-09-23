@@ -1,6 +1,6 @@
 FROM daocloud.io/centos:7
 
-ARG JDK_DOWNLOAD_URL=http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-linux-x64.rpm?AuthParam=1506158316_08fbc1ef8fa0547b9bb600de08f5ee5c
+ARG JDK_DOWNLOAD_URL=https://img.maitao.com/zhaozhen/jdk-8u51-linux-x64.rpm
 RUN curl -o jdk-8u101-linux-x64.rpm   ${JDK_DOWNLOAD_URL}
 RUN rpm -ivh jdk-8u101-linux-x64.rpm
 RUN yum -y install git
