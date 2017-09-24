@@ -28,4 +28,4 @@ RUN chmod +x  /usr/local/bin/mvn-entrypoint.sh
 VOLUME "$USER_HOME_DIR/.m2"
 
 ENTRYPOINT ["/usr/local/bin/mvn-entrypoint.sh"]
-CMD ["mvn"]
+CMD ["bash"]
