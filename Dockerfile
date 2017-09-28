@@ -1,13 +1,13 @@
 FROM daocloud.io/centos:7
 
 ARG JDK_DOWNLOAD_URL=https://img.maitao.com/zhaozhen/jdk-8u51-linux-x64.rpm
-RUN curl -o jdk-8u101-linux-x64.rpm   ${JDK_DOWNLOAD_URL}
-RUN rpm -ivh jdk-8u101-linux-x64.rpm
-RUN yum -y install git
+RUN curl -o jdk-8u51-linux-x64.rpm   ${JDK_DOWNLOAD_URL}
+RUN rpm -ivh jdk-8u51-linux-x64.rpm
+RUN yum -y install git vim unzip
 
 
 ARG MAVEN_VERSION=3.5.0
-ARG USER_HOME_DIR="/root"
+ARG USER_HOME_DIR="/opt/maven/"
 ARG SHA=beb91419245395bd69a4a6edad5ca3ec1a8b64e41457672dc687c173a495f034
 ARG BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
 

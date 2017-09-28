@@ -1,0 +1,44 @@
+version: '2'
+services:
+  mysql5.6:
+    image: mysql:5.6
+    ports:
+      - "3306:3306"
+    hostname: my-mysql
+    volumes:
+      - /home/LIVE/mysql/lib/data:/var/lib/mysql
+      - /home/LIVE/mysql/conf/my.cnf:/etc/mysql/my.cnf
+      - /home/LIVE/mysql/logs:/logs
+      - /home/LIVE/mysql/data:/mysql_data
+    environment:
+      MYSQL_ROOT_PASSWORD : zhen
+
+  redis4.0:
+    image: redis:4.0
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+    hostname: my-redis
+    volumes:
+      - /home/LIVE/redis/data:/data
+
+  elasticsearch2.4.6:
+    image: es2.4.6
+    ports:
+      - "9200:9200"
+    volumes: 
+      - /home/LIVE/elasticsearch/data:/usr/share/elasticsearch/data
+    hostname: my-es
+
+  rabbitmq3.6.10:
+    image: rabbitmq:3.6.10-management
+    ports:
+      - "15672:15672"
+    hostname: my-rabbit
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+      - RABBITMQ_DEFAULT_VHOST=/home/LIVE/rabbitmq/
