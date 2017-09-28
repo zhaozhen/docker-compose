@@ -5,6 +5,7 @@ ARG JCE1.8_URL=http://img.maitao.com/jce_policy-8.zip
 
 #install jdk1.8
 RUN curl -o jdk-8u51-linux-x64.rpm   ${JDK_DOWNLOAD_URL}
+
 RUN rpm -ivh jdk-8u51-linux-x64.rpm
 
 # install other package
@@ -18,7 +19,7 @@ RUN curl -o jce_policy-8.zip   ${JCE1.8_URL}      \
     && cp -a /usr/java/jdk1.8.0_51/jre/lib/security  /usr/java/jdk1.8.0_51/jre/lib/security.old \
     && rm -fr /usr/java/jdk1.8.0_51/jre/lib/security/   \
     && mkdir /usr/java/jdk1.8.0_51/jre/lib/security/    \
-    && mv UnlimitedJCEPolicyJDK8/*   /usr/java/jdk1.8.0_51/jre/lib/security/   \
+    && mv UnlimitedJCEPolicyJDK8/*   /usr/java/jdk1.8.0_51/jre/lib/security/  
 
 
 ARG MAVEN_VERSION=3.5.0
