@@ -1,7 +1,7 @@
 FROM daocloud.io/centos:7
 
 ARG JDK_DOWNLOAD_URL=https://img.maitao.com/zhaozhen/jdk-8u51-linux-x64.rpm
-ARG JCE1.8_URL=http://img.maitao.com/jce_policy-8.zip
+ARG JCE_URL=http://img.maitao.com/jce_policy-8.zip
 
 #install jdk1.8
 RUN curl -o jdk-8u51-linux-x64.rpm   ${JDK_DOWNLOAD_URL}
@@ -11,7 +11,7 @@ RUN rpm -ivh jdk-8u51-linux-x64.rpm
 RUN yum -y install git vim unzip
 
 # install jce
-RUN curl -o jce_policy-8.zip   ${JCE1.8_URL}
+RUN curl -O   ${JCE_URL}
 
 # RUN curl -o jce_policy-8.zip   ${JCE1.8_URL}      \
 #     && unzip  jce_policy-8.zip                 \
