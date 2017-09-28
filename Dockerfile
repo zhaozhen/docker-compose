@@ -11,7 +11,7 @@ RUN rpm -ivh jdk-8u51-linux-x64.rpm
 RUN yum -y install git vim unzip
 
 # install jce
-RUN curl -o jce_policy-8.zip   ${JCE1.8_URL}
+#RUN curl -o jce_policy-8.zip   ${JCE1.8_URL}
 
 RUN curl -o jce_policy-8.zip   ${JCE1.8_URL}      \
     && unzip  jce_policy-8.zip                 \
