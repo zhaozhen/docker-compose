@@ -11,7 +11,7 @@ RUN rpm -ivh jdk-8u51-linux-x64.rpm
 RUN yum -y install git vim unzip
 
 # install jce
-#RUN curl -o jce_policy-8.zip   ${JCE1.8_URL}
+RUN curl -o jce_policy-8.zip   ${JCE1.8_URL}
 
 # RUN curl -o jce_policy-8.zip   ${JCE1.8_URL}      \
 #     && unzip  jce_policy-8.zip                 \
@@ -49,7 +49,7 @@ COPY mvn-entrypoint.sh /usr/local/bin/mvn-entrypoint.sh
 COPY settings-docker.xml /usr/share/maven/ref/
 RUN cp -a /usr/share/maven/ref/settings-docker.xml  /usr/share/maven/ref/settings.xml
 #复制脚本
-RUN mkdir -p ／opt/jar/release  \
+RUN mkdir -p /opt/jar/release  \
     && mkdir -p /opt/jar/source \
     && mkdir -p /opt/logs  \
     && mkdir -p /opt/script 
@@ -57,9 +57,12 @@ RUN mkdir -p ／opt/jar/release  \
 COPY script/* /opt/script/
 COPY jar/* /opt/jar/
 
+RUN chmod +x  /opt/script/
+RUN chmod +x /opt/jar/
+
 #git  下啦文件准备
-RUN echo "https://zhen286339409:zz286339409@git.coding.net"  > ~/.gitconfig
-# RUN git config --global credential.helper store 
+RUN echo "https://zhen286339409:zz286339409@git.coding.net"  > ~/.git-credentials 
+RUN git config --global credential.helper store
 
 RUN chmod +x  /usr/local/bin/mvn-entrypoint.sh
 VOLUME "$USER_HOME_DIR/.m2"
