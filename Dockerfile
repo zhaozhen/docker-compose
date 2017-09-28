@@ -59,7 +59,7 @@ COPY jar/* /opt/jar/
 
 #git  下啦文件准备
 RUN echo "https://zhen286339409:zz286339409@git.coding.net"  > ~/.gitconfig
-RUN git config --global credential.helper store 
+# RUN git config --global credential.helper store 
 
 RUN chmod +x  /usr/local/bin/mvn-entrypoint.sh
 VOLUME "$USER_HOME_DIR/.m2"
