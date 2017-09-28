@@ -10,16 +10,16 @@ function_release_spring()
   kill $(ps aux|grep java|grep registry-1.0.0.jar |awk '{print $2;}')
 
 
-  nohup  java -jar -Xms160m -Xmx320m -XX:MaxMetaspaceSize=300m -XX:CompressedClassSpaceSize=80m -Xss256k -Xmn80m -XX:InitialCodeCacheSize=40m -XX:ReservedCodeCacheSize=80m -XX:MaxDirectMemorySize=160m /opt/jar/release/registry-1.0.0.jar  > /opt/logs/registry/registry.log &
+  nohup  java -jar -Xms160m -Xmx320m -XX:MaxMetaspaceSize=300m -XX:CompressedClassSpaceSize=80m -Xss256k -Xmn80m -XX:InitialCodeCacheSize=40m -XX:ReservedCodeCacheSize=80m -XX:MaxDirectMemorySize=160m /opt/jar/release/registry-1.0.0.jar  > /opt/logs/registry.log &
 
-  printf "\n\n tail -f /opt/logs/registry/registry.log \n"
+  printf "\n\n tail -f /opt/logs/registry.log \n"
 
 }
 
 function_log_spring()
 {
 
-  tail -f /opt/logs/registry/registry.log 
+  tail -f /opt/logs/registry.log 
 }
 
 function_stop_spring(){
@@ -32,5 +32,5 @@ elif [ "$1" = "log" ]; then
 elif [ "$1" = "log" ]; then
   function_stop_spring
 else
-  printf "Usage: sh /opt/scripts/manager.sh {release|log|stop}\n"
+  printf "Usage: sh /opt/scripts/registry.sh {release|log|stop}\n"
 fi

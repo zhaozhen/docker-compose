@@ -36,9 +36,10 @@ RUN mkdir -p /usr/share/maven  /usr/share/maven/ref/ \
 
 
 
-#删除文件包
-RUN rm  -fr jdk-8u51-linux-x64.rpm
-RUN rm  -fr UnlimitedJCEPolicyJDK8
+#删除下载的文件包
+RUN rm  -fr jdk-8u51-linux-x64.rpm \
+    && rm  -fr UnlimitedJCEPolicyJDK8/ \
+    && rm -fr jce_policy-8.zip 
 
 
 ENV MAVEN_HOME /usr/share/maven
@@ -57,8 +58,8 @@ RUN mkdir -p /opt/jar/release  \
 COPY script/* /opt/script/
 COPY jar/* /opt/jar/
 
-RUN chmod +x  /opt/script/
-RUN chmod +x /opt/jar/
+RUN chmod +x  /opt/script/*
+RUN chmod +x /opt/jar/*
 
 #git  下啦文件准备
 RUN echo "https://zhen286339409:zz286339409@git.coding.net"  > ~/.git-credentials 

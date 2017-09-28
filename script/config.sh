@@ -10,16 +10,16 @@ function_release_spring()
   kill $(ps aux|grep java|grep config-1.0.0.jar |awk '{print $2;}')
 
 
-  nohup  java -jar -Xms160m -Xmx320m -XX:MaxMetaspaceSize=300m -XX:CompressedClassSpaceSize=80m -Xss256k -Xmn80m -XX:InitialCodeCacheSize=40m -XX:ReservedCodeCacheSize=80m -XX:MaxDirectMemorySize=160m /opt/jar/release/config-1.0.0.jar  > /opt/logs/config/config.log &
+  nohup  java -jar -Xms160m -Xmx320m -XX:MaxMetaspaceSize=300m -XX:CompressedClassSpaceSize=80m -Xss256k -Xmn80m -XX:InitialCodeCacheSize=40m -XX:ReservedCodeCacheSize=80m -XX:MaxDirectMemorySize=160m /opt/jar/release/config-1.0.0.jar  > /opt/logs/config.log &
 
-  printf "\n\n tail -f /opt/logs/config/config.log \n"
+  printf "\n\n tail -f /opt/logs/config.log \n"
 
 }
 
 function_log_spring()
 {
 
-  tail -f /opt/logs/config/config.log 
+  tail -f /opt/logs/config.log 
 }
 
 function_stop_spring(){
