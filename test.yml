@@ -26,7 +26,7 @@ ARG USER_HOME_DIR="/root"
 ARG SHA=beb91419245395bd69a4a6edad5ca3ec1a8b64e41457672dc687c173a495f034
 ARG BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
 
-RUN mkdir -p /usr/share/maven  \
+RUN mkdir -p /usr/share/maven  /usr/share/maven/ref/ \
   && curl -fsSL -o /tmp/apache-maven.tar.gz ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
   && echo "${SHA}  /tmp/apache-maven.tar.gz" | sha256sum -c - \
   && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \
@@ -37,7 +37,7 @@ RUN mkdir -p /usr/share/maven  \
 
 
 #删除文件包
-#RUN rm  -fr jdk-8u51-linux-x64.rpm
+RUN rm  -fr jdk-8u51-linux-x64.rpm
 # RUN rm  -fr UnlimitedJCEPolicyJDK8
 
 
@@ -46,8 +46,8 @@ ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 ENV JAVA_HOME /usr/java/jdk1.8.0_51
 
 COPY mvn-entrypoint.sh /usr/local/bin/mvn-entrypoint.sh
-COPY settings-docker.xml $USER_HOME_DIR/.m2/
-#RUN cp -a $USER_HOME_DIR/.m2/settings-docker.xml  $USER_HOME_DIR/.m2/settings.xml
+COPY settings-docker.xml /usr/share/maven/ref/
+RUN cp -a /usr/share/maven/ref/settings-docker.xml  /usr/share/maven/ref/settings.xml
 #复制脚本
 RUN mkdir -p ／opt/jar/release  \
     && mkdir -p /opt/jar/source \
