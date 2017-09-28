@@ -11,14 +11,14 @@ RUN rpm -ivh jdk-8u51-linux-x64.rpm
 RUN yum -y install git vim unzip
 
 # install jce
-RUN curl -O   ${JCE_URL}
+#RUN curl -O   ${JCE_URL}
 
-# RUN curl -o jce_policy-8.zip   ${JCE1.8_URL}      \
-#     && unzip  jce_policy-8.zip                 \
-#     && cp -a /usr/java/jdk1.8.0_51/jre/lib/security  /usr/java/jdk1.8.0_51/jre/lib/security.old \
-#     && rm -fr /usr/java/jdk1.8.0_51/jre/lib/security/   \
-#     && mkdir /usr/java/jdk1.8.0_51/jre/lib/security/    \
-#     && mv UnlimitedJCEPolicyJDK8/*   /usr/java/jdk1.8.0_51/jre/lib/security/   
+RUN curl -o jce_policy-8.zip   ${JCE_URL}      \
+    && unzip  jce_policy-8.zip                 \
+    && cp -a /usr/java/jdk1.8.0_51/jre/lib/security  /usr/java/jdk1.8.0_51/jre/lib/security.old \
+    && rm -fr /usr/java/jdk1.8.0_51/jre/lib/security/   \
+    && mkdir /usr/java/jdk1.8.0_51/jre/lib/security/    \
+    && mv UnlimitedJCEPolicyJDK8/*   /usr/java/jdk1.8.0_51/jre/lib/security/ 
 
 
 ARG MAVEN_VERSION=3.5.0
