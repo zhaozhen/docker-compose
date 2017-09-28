@@ -37,7 +37,7 @@ RUN mkdir -p /usr/share/maven  \
 
 
 #删除文件包
-RUN rm  -fr jdk-8u51-linux-x64.rpm
+#RUN rm  -fr jdk-8u51-linux-x64.rpm
 # RUN rm  -fr UnlimitedJCEPolicyJDK8
 
 
@@ -47,7 +47,7 @@ ENV JAVA_HOME /usr/java/jdk1.8.0_51
 
 COPY mvn-entrypoint.sh /usr/local/bin/mvn-entrypoint.sh
 COPY settings-docker.xml $USER_HOME_DIR/.m2/
-RUN cp -a $USER_HOME_DIR/.m2/settings-docker.xml  $USER_HOME_DIR/.m2/settings.xml
+#RUN cp -a $USER_HOME_DIR/.m2/settings-docker.xml  $USER_HOME_DIR/.m2/settings.xml
 #复制脚本
 RUN mkdir -p ／opt/jar/release  \
     && mkdir -p /opt/jar/source \
