@@ -4,7 +4,7 @@ function_release_spring()
   printf "Starting Compile Package WAR Registry...\n"
   sh /opt/jar/config.sh
 
-  printf "Releaseing Registry  Ports 9999...\n"
+  printf "Releaseing Config  Ports 8888...\n"
 
   sleep 8
   kill $(ps aux|grep java|grep config-1.0.0.jar |awk '{print $2;}')
@@ -22,10 +22,16 @@ function_log_spring()
   tail -f /opt/logs/config/config.log 
 }
 
+function_stop_spring(){
+  kill $(ps aux|grep java|grep config-1.0.0.jar |awk '{print $2;}')
+}
+
 if [ "$1" = "release" ]; then
   function_release_spring
 elif [ "$1" = "log" ]; then
   function_log_spring
+elif [ "$1" = "log" ]; then
+  function_stop_spring
 else
-  printf "Usage: sh /opt/scripts/config.sh {release|log}\n"
+  printf "Usage: sh /opt/scripts/config.sh {release|log|stop}\n"
 fi

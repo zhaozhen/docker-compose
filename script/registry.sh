@@ -22,10 +22,15 @@ function_log_spring()
   tail -f /opt/logs/registry/registry.log 
 }
 
+function_stop_spring(){
+    kill $(ps aux|grep java|grep registry-1.0.0.jar |awk '{print $2;}')
+}
 if [ "$1" = "release" ]; then
   function_release_spring
 elif [ "$1" = "log" ]; then
   function_log_spring
+elif [ "$1" = "log" ]; then
+  function_stop_spring
 else
-  printf "Usage: sh /opt/scripts/manager.sh {release|log}\n"
+  printf "Usage: sh /opt/scripts/manager.sh {release|log|stop}\n"
 fi
