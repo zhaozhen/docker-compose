@@ -61,16 +61,17 @@ COPY jar/* /opt/jar/
 RUN chmod +x  /opt/script/*
 RUN chmod +x /opt/jar/*
 
-#git  下啦文件准备
+#git  下载文件准备
 RUN echo "https://zhen286339409:zz286339409@git.coding.net"  > ~/.git-credentials 
 RUN git config --global credential.helper store
 
-# 下载代码mvn编译代码
+# 下载代码并mvn编译代码
 RUN cd /opt/jar/source \
     && git clone https://git.coding.net/maitao/maitao-cloud.git \
     && cd /opt/jar/source/maitao-cloud/ \
     && mvn install 
 
+# mvn安装入口添加执行权限
 RUN chmod +x  /usr/local/bin/mvn-entrypoint.sh
 VOLUME "$USER_HOME_DIR/.m2"
 
