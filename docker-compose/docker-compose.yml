@@ -11,7 +11,6 @@ services:
       - /home/LIVE/mysql/conf/my.cnf:/etc/mysql/my.cnf
       - /home/LIVE/mysql/logs:/logs
       - /home/LIVE/mysql/data:/mysql_data
-      - /home/LIVE/mysql/logs/error:/var/log/mysql/error.log
     environment:
       MYSQL_ROOT_PASSWORD : zhen
       MYSQL_DATABASE: maitao
@@ -33,6 +32,7 @@ services:
     container_name: my-es
     ports:
       - "9200:9200"
+      - "9300:9300"
     volumes: 
       - /home/LIVE/elasticsearch/data:/usr/share/elasticsearch/data
     hostname: my-es
@@ -45,7 +45,11 @@ services:
     hostname: my-rabbit
     ports:
       - "5672:5672"
-      - "15672:15672"
+      - "15672:15672" 
+      - "4369:4369"
+      - "5671:5671"
+      - "15671:15671"
+      - "25672:25672"
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
@@ -54,31 +58,30 @@ services:
   web:
     container_name: my-web
     image:  daocloud.io/dasy/demo:test
-    ports:
-      #registry
-      - "9999:9999"
-      #config
-      - "8888:8888"
-      #maitao-dashbord
-      - "8806:8806"
-      #maitao-sercice
-      - "8866:8866"
-      #maitao-turbin
-      - "8809:8809"
-      #service-common
-      - "8091:8091"
-      #service-product
-      - "8092:8092"
-      #service-user
-      - "8093:8093"
-      #service-batch
-      - "8090:8090"
-      #turbin
-      - "8809:8809"
-      #gatway
-      - "8999:8999"
-      #zipkin
-      - "9411:9411"
+    ports: 
+      - "9999:9999" 
+      - "8888:8888" 
+      - "8806:8806" 
+      - "8866:8866"  
+      - "8809:8809"  
+      - "8091:8091"  
+      - "8092:8092"  
+      - "8093:8093" 
+      - "8090:8090"  
+      - "8999:8999" 
+      - "9411:9411"  
+      
+      # - "9999:9999" #registry
+      # - "8888:8888" #config
+      # - "8806:8806" #maitao-dashbord
+      # - "8866:8866" #maitao-sercice
+      # - "8809:8809" #maitao-turbin
+      # - "8091:8091" #service-common
+      # - "8092:8092" #service-product
+      # - "8093:8093" #service-user
+      # - "8090:8090" #service-batch
+      # - "8999:8999" #gatway
+      # - "9411:9411" #zipkin
     tty: true
     hostname: my-web
     links:

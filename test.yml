@@ -67,9 +67,10 @@ RUN git config --global credential.helper store
 
 # 下载代码并mvn编译代码
 RUN cd /opt/jar/source \
-    && git clone https://git.coding.net/maitao/maitao-cloud.git 
-   # && cd /opt/jar/source/maitao-cloud/ 
-    # && mvn install 
+    && git clone https://git.coding.net/maitao/maitao-cloud.git \
+    && cd /opt/jar/source/maitao-cloud/  \
+    && git checkout origin/ticket-test  \
+    && mvn install 
 
 # mvn安装入口添加执行权限
 RUN chmod +x  /usr/local/bin/mvn-entrypoint.sh
