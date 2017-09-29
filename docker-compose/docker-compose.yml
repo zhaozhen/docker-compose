@@ -4,17 +4,23 @@ services:
     image: mysql:5.6
     ports:
       - "3306:3306"
+    container_name: my-mysql
     hostname: my-mysql
     volumes:
       - /home/LIVE/mysql/lib/data:/var/lib/mysql
       - /home/LIVE/mysql/conf/my.cnf:/etc/mysql/my.cnf
       - /home/LIVE/mysql/logs:/logs
       - /home/LIVE/mysql/data:/mysql_data
+      - /home/LIVE/mysql/logs/error:/var/log/mysql/error.log
     environment:
       MYSQL_ROOT_PASSWORD : zhen
+      MYSQL_DATABASE: maitao
+      MYSQL_USER: maitao
+      MYSQL_PASSWORD: maitao
 
   redis4.0:
     image: redis:4.0
+    container_name: my-redis
     command: redis-server --appendonly yes
     ports:
       - "6379:6379"
@@ -24,6 +30,7 @@ services:
 
   elasticsearch2.4.6:
     image: es2.4.6
+    container_name: my-es
     ports:
       - "9200:9200"
     volumes: 
@@ -32,6 +39,7 @@ services:
 
   rabbitmq3.6.10:
     image: rabbitmq:3.6.10-management
+    container_name: my-rabbit
     ports:
       - "15672:15672"
     hostname: my-rabbit
@@ -39,6 +47,44 @@ services:
       - "5672:5672"
       - "15672:15672"
     environment:
-      - RABBITMQ_DEFAULT_USER=admin
-      - RABBITMQ_DEFAULT_PASS=admin
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
       - RABBITMQ_DEFAULT_VHOST=/home/LIVE/rabbitmq/
+
+  web:
+    container_name: my-web
+    image:  daocloud.io/dasy/demo:test
+    ports:
+      #registry
+      - "9999:9999"
+      #config
+      - "8888:8888"
+      #maitao-dashbord
+      - "8806:8806"
+      #maitao-sercice
+      - "8866:8866"
+      #maitao-turbin
+      - "8809:8809"
+      #service-common
+      - "8091:8091"
+      #service-product
+      - "8092:8092"
+      #service-user
+      - "8093:8093"
+      #service-batch
+      - "8090:8090"
+      #turbin
+      - "8809:8809"
+      #gatway
+      - "8999:8999"
+      #zipkin
+      - "9411:9411"
+    tty: true
+    hostname: my-web
+    links:
+      - mysql5.6
+      - redis4.0
+      - elasticsearch2.4.6
+      - rabbitmq3.6.10
+    volumes:
+      - /home/LIVE/web/logs:/opt/logs

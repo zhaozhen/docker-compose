@@ -1,10 +1,10 @@
 function_release_spring()
 {
 
-  printf "Starting Compile Package WAR Registry...\n"
+  printf "Starting Compile Package Jar Service-common...\n"
   sh /opt/jar/service-common.sh
 
-  printf "Releaseing Registry  Ports 9999...\n"
+  printf "Releaseing Service-common  Ports 8761...\n"
 
   sleep 8
   kill $(ps aux|grep java|grep service-common-1.0.0.jar |awk '{print $2;}')

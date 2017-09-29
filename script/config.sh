@@ -1,7 +1,7 @@
 function_release_spring()
 {
 
-  printf "Starting Compile Package WAR Registry...\n"
+  printf "Starting Compile Package Jar Config...\n"
   sh /opt/jar/config.sh
 
   printf "Releaseing Config  Ports 8888...\n"
