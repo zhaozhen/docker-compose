@@ -28,13 +28,16 @@ services:
       - /home/LIVE/redis/data:/data
 
   elasticsearch2.4.6:
-    image: es2.4.6
-    container_name: my-es
+    # image: es2.4.6
+    images:  maitao-escluster:latest
+    container_name: my-es 
     ports:
       - "9200:9200"
       - "9300:9300"
     volumes: 
       - /home/LIVE/elasticsearch/data:/usr/share/elasticsearch/data
+      - /home/LIVE/elasticsearch/config:/usr/share/elasticsearch/config
+      - /home/LIVE/elasticsearch/logs:/usr/share/elasticsearch/logs
     hostname: my-es
 
   rabbitmq3.6.10:
@@ -55,39 +58,27 @@ services:
       - RABBITMQ_DEFAULT_PASS=guest
       - RABBITMQ_DEFAULT_VHOST=/home/LIVE/rabbitmq/
 
-  web:
-    container_name: my-web
-    image:  daocloud.io/dasy/demo:test
-    ports: 
-      - "9999:9999" 
-      - "8888:8888" 
-      - "8806:8806" 
-      - "8866:8866"  
-      - "8809:8809"  
-      - "8091:8091"  
-      - "8092:8092"  
-      - "8093:8093" 
-      - "8090:8090"  
-      - "8999:8999" 
-      - "9411:9411"  
-      
-      # - "9999:9999" #registry
-      # - "8888:8888" #config
-      # - "8806:8806" #maitao-dashbord
-      # - "8866:8866" #maitao-sercice
-      # - "8809:8809" #maitao-turbin
-      # - "8091:8091" #service-common
-      # - "8092:8092" #service-product
-      # - "8093:8093" #service-user
-      # - "8090:8090" #service-batch
-      # - "8999:8999" #gatway
-      # - "9411:9411" #zipkin
-    tty: true
-    hostname: my-web
-    links:
-      - mysql5.6
-      - redis4.0
-      - elasticsearch2.4.6
-      - rabbitmq3.6.10
-    volumes:
-      - /home/LIVE/web/logs:/opt/logs
+  # web: 可能要被干掉了
+  #   container_name: my-web
+  #   image:  daocloud.io/dasy/demo:test
+  #   ports: 
+  #     - "9999:9999" 
+  #     - "8888:8888" 
+  #     - "8806:8806" 
+  #     - "8866:8866"  
+  #     - "8809:8809"  
+  #     - "8091:8091"  
+  #     - "8092:8092"  
+  #     - "8093:8093" 
+  #     - "8090:8090"  
+  #     - "8999:8999" 
+  #     - "9411:9411"  
+  #   tty: true
+  #   hostname: my-web
+  #   links:
+  #     - mysql5.6
+  #     - redis4.0
+  #     - elasticsearch2.4.6
+  #     - rabbitmq3.6.10
+  #   volumes:
+  #     - /home/LIVE/web/logs:/opt/logs
