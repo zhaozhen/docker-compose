@@ -77,8 +77,15 @@ RUN git config --global credential.helper store
 RUN curl https://img.maitao.com/repo > repo  \
     && chmod a+x repo  
 
+##repo配置需要
+RUN  git config --global user.email "123@qq.com" \
+  && git config --global user.name "maitao"
+
+## 下载代码
 RUN cd  /opt/jar/source/maitao-cloud \
-    && /repo init -u https://git.coding.net/maitao/maitao-manifest.git -b develop -m maitao-cloud_https.xml
+    && echo y | /repo init -u  https://git.coding.net/maitao/maitao-manifest.git -b develop -m maitao-cloud_https.xml \
+    && /repo  sync \
+    && /repo start develop --all 
 
 
 # mvn安装入口添加执行权限

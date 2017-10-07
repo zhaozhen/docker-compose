@@ -53,7 +53,8 @@ RUN cp -a /usr/share/maven/ref/settings-docker.xml  /usr/share/maven/ref/setting
 RUN mkdir -p /opt/jar/release  \
     && mkdir -p /opt/jar/source \
     && mkdir -p /opt/logs  \
-    && mkdir -p /opt/script 
+    && mkdir -p /opt/script  \
+    && mkdit -p /opt/jar/maitao-cloud 
 
 COPY script/* /opt/script/
 COPY jar/* /opt/jar/
@@ -65,12 +66,27 @@ RUN chmod +x /opt/jar/*
 RUN echo "https://zhen286339409:zz286339409@git.coding.net"  > ~/.git-credentials 
 RUN git config --global credential.helper store
 
-# 下载代码并mvn编译代码
-RUN cd /opt/jar/source \
-    && git clone https://git.coding.net/maitao/maitao-cloud.git 
+# 下载代码并mvn编译代码 ，旧代码的下载方式
+# RUN cd /opt/jar/source \
+#     && git clone https://git.coding.net/maitao/maitao-cloud.git 
     # && cd /opt/jar/source/maitao-cloud/  \
     # && git checkout origin/ticket-test  \
     # && mvn install 
+
+#新代码的下载方式
+RUN curl https://img.maitao.com/repo > repo  \
+    && chmod a+x repo  
+
+##repo配置需要
+RUN  git config --global user.email "123@qq.com" \
+  && git config --global user.name "maitao"
+
+## 下载代码
+RUN cd  /opt/jar/source/maitao-cloud \
+    && echo y | /repo init -u  https://git.coding.net/maitao/maitao-manifest.git -b develop -m maitao-cloud_https.xml \
+    && /repo  sync \
+    && /repo start develop --all 
+
 
 # mvn安装入口添加执行权限
 RUN chmod +x  /usr/local/bin/mvn-entrypoint.sh
