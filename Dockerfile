@@ -39,12 +39,6 @@ RUN mkdir -p /usr/share/maven  /usr/share/maven/ref/ \
 
 
 
-#删除下载的文件包
-RUN rm  -fr jdk-8u51-linux-x64.rpm \
-    && rm  -fr UnlimitedJCEPolicyJDK8/ \
-    && rm -fr jce_policy-8.zip 
-
-
 ENV MAVEN_HOME /usr/share/maven
 ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 ENV JAVA_HOME /usr/java/jdk1.8.0_51
@@ -57,7 +51,8 @@ RUN mkdir -p /opt/jar/release  \
     && mkdir -p /opt/jar/source \
     && mkdir -p /opt/logs  \
     && mkdir -p /opt/script  \
-    && mkdir -p /opt/jar/maitao-cloud 
+    && mkdir -p /opt/jar/source/maitao-cloud 
+
 
 COPY script/* /opt/script/
 COPY jar/* /opt/jar/
@@ -89,6 +84,15 @@ RUN cd  /opt/jar/source/maitao-cloud \
     && echo y | /repo init -u  https://git.coding.net/maitao/maitao-manifest.git -b develop -m maitao-cloud_https.xml \
     && /repo  sync \
     && /repo start develop --all 
+
+
+
+#删除下载的文件包
+RUN rm  -fr jdk-8u51-linux-x64.rpm \
+    && rm  -fr UnlimitedJCEPolicyJDK8/ \
+    && rm -fr jce_policy-8.zip  \
+    && rm -fr repo
+
 
 
 # mvn安装入口添加执行权限
