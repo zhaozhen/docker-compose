@@ -10,6 +10,9 @@ RUN rpm -ivh jdk-8u51-linux-x64.rpm
 # install other package
 RUN yum -y install git vim unzip
 
+# install docker
+RUN curl -fsSL https://get.docker.com/ | sh
+
 # install jce
 #RUN curl -O   ${JCE_URL}
 
@@ -54,7 +57,7 @@ RUN mkdir -p /opt/jar/release  \
     && mkdir -p /opt/jar/source \
     && mkdir -p /opt/logs  \
     && mkdir -p /opt/script  \
-    && mkdit -p /opt/jar/maitao-cloud 
+    && mkdir -p /opt/jar/maitao-cloud 
 
 COPY script/* /opt/script/
 COPY jar/* /opt/jar/
