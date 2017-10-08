@@ -28,8 +28,7 @@ services:
       - /home/LIVE/redis/data:/data
 
   elasticsearch2.4.6:
-    # image: es2.4.6
-    images:  maitao-escluster:latest
+    image:  maitao-escluster:latest
     container_name: my-es 
     ports:
       - "9200:9200"
@@ -58,27 +57,10 @@ services:
       - RABBITMQ_DEFAULT_PASS=guest
       - RABBITMQ_DEFAULT_VHOST=/home/LIVE/rabbitmq/
 
-  # web: 可能要被干掉了
-  #   container_name: my-web
-  #   image:  daocloud.io/dasy/demo:test
-  #   ports: 
-  #     - "9999:9999" 
-  #     - "8888:8888" 
-  #     - "8806:8806" 
-  #     - "8866:8866"  
-  #     - "8809:8809"  
-  #     - "8091:8091"  
-  #     - "8092:8092"  
-  #     - "8093:8093" 
-  #     - "8090:8090"  
-  #     - "8999:8999" 
-  #     - "9411:9411"  
-  #   tty: true
-  #   hostname: my-web
-  #   links:
-  #     - mysql5.6
-  #     - redis4.0
-  #     - elasticsearch2.4.6
-  #     - rabbitmq3.6.10
-  #   volumes:
-  #     - /home/LIVE/web/logs:/opt/logs
+  build: 
+    container_name: my-build
+    image:  daocloud.io/dasy/demo:test1
+    tty: true
+    hostname: my-build
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

@@ -11,7 +11,7 @@ RUN rpm -ivh jdk-8u51-linux-x64.rpm
 RUN yum -y install git vim unzip
 
 # install docker
-RUN curl -fsSL https://get.docker.com/ | sh
+# RUN curl -fsSL https://get.docker.com/ | sh
 
 # install jce
 #RUN curl -O   ${JCE_URL}
