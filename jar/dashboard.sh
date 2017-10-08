@@ -1,10 +1,11 @@
 #!/bin/bash
+
 branch_name=$1
 
-s_path="/opt/jar/source/maitao-cloud/service-common"
+s_path="/opt/jar/source/maitao-cloud/dashboard"
 # w_path="/opt/jar/release"
 
-t_path="/opt/jar/release/service-common-$branch_name"
+t_path="/opt/jar/release/dashboard-$branch_name"
 
 if [  -d  $t_path ]; then
   rm -fr $t_path;
@@ -21,9 +22,9 @@ git checkout $branch_name
 git fetch origin
 git reset --hard origin/$branch_name
 
-echo "Start Update Service-common Source...................[OK]"
+echo "Start Update Dashboard Source...................[OK]"
 mvn clean compile package
-cp -f $s_path/target/service-common-1.0.0.jar $t_path/service-common-1.0.0.jar
+cp -f $s_path/target/dashboard-1.0.0.jar $t_path/dashboard-1.0.0.jar
 cp -f $s_path/src/main/docker/Dockerfile $t_path/Dockerfile
 
-echo "Deploy Service-common.jar ....................[OK]"
+echo "Deploy Dashboard.jar ....................[OK]"

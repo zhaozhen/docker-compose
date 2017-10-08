@@ -21,5 +21,5 @@ else
 fi
 
 #打包该分支，如果没有改分支则使用develop进行打包
-docker exec -i my-web bash -c "cd /opt/jar/ && sh common.sh $branch_name" 
+docker exec -i my-build bash -c "cd /opt/jar/ && sh common.sh $branch_name" 
 # 因为是common包，所以不会特意有Dockerfile文件，仅仅在docker容器内部安装
