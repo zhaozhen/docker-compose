@@ -14,16 +14,16 @@ else
 fi
 
 #打包该分支，如果没有改分支则使用develop进行打包
-docker exec -i my-build bash -c "cd /opt/jar/ && sh config.sh $branch_name" 
+docker exec -i my-build bash -c "cd /opt/jar/ && sh turbine.sh $branch_name" 
 
 ##编译docker容器，并运行
 ### 停止容器
-docker stop config-$branch_name
+docker stop turbine-$branch_name
 ### 删除容器
-docker rm config-$branch_name
+docker rm turbine-$branch_name
 ### 删除镜像
-docker rmi config:$branch_name
+docker rmi turbine:$branch_name
 ### 重新编译镜像
-cd /opt/release/config-$branch_name && docker build -t  config:$branch_name . 
+cd /opt/release/turbine-$branch_name && docker build -t  turbine:$branch_name . 
 ### 运行镜像
-docker run -itd  --name config-$branch_name  -p 8888:8888 config:$branch_name
+docker run -itd  --name turbine-$branch_name  -p 8809:8809 turbine:$branch_name

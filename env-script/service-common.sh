@@ -14,16 +14,16 @@ else
 fi
 
 #打包该分支，如果没有改分支则使用develop进行打包
-docker exec -i my-build bash -c "cd /opt/jar/ && sh config.sh $branch_name" 
+docker exec -i my-build bash -c "cd /opt/jar/ && sh service-common.sh $branch_name" 
 
 ##编译docker容器，并运行
 ### 停止容器
-docker stop config-$branch_name
+docker stop service-common-$branch_name
 ### 删除容器
-docker rm config-$branch_name
+docker rm service-common-$branch_name
 ### 删除镜像
-docker rmi config:$branch_name
+docker rmi service-common:$branch_name
 ### 重新编译镜像
-cd /opt/release/config-$branch_name && docker build -t  config:$branch_name . 
+cd /opt/release/service-common-$branch_name && docker build -t  service-common:$branch_name . 
 ### 运行镜像
-docker run -itd  --name config-$branch_name  -p 8888:8888 config:$branch_name
+docker run -itd  --name service-common-$branch_name  -p 8091:8091 service-common:$branch_name

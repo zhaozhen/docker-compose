@@ -14,16 +14,16 @@ else
 fi
 
 #打包该分支，如果没有改分支则使用develop进行打包
-docker exec -i my-build bash -c "cd /opt/jar/ && sh config.sh $branch_name" 
+docker exec -i my-build bash -c "cd /opt/jar/ && sh zipkin.sh $branch_name" 
 
 ##编译docker容器，并运行
 ### 停止容器
-docker stop config-$branch_name
+docker stop zipkin-$branch_name
 ### 删除容器
-docker rm config-$branch_name
+docker rm zipkin-$branch_name
 ### 删除镜像
-docker rmi config:$branch_name
+docker rmi zipkin:$branch_name
 ### 重新编译镜像
-cd /opt/release/config-$branch_name && docker build -t  config:$branch_name . 
+cd /opt/release/zipkin-$branch_name && docker build -t  zipkin:$branch_name . 
 ### 运行镜像
-docker run -itd  --name config-$branch_name  -p 8888:8888 config:$branch_name
+docker run -itd  --name zipkin-$branch_name  -p 9411:9411 zipkin:$branch_name
