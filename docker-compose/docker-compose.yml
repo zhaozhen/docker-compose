@@ -62,3 +62,4 @@ services:
     hostname: my-build
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      # - /opt/release:/opt/jar/release
