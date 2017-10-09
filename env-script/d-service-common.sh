@@ -20,6 +20,7 @@ docker exec -i my-build bash -c "cd /opt/jar/ && sh d-service-common.sh $branch_
 ### 停止容器
 docker stop service-common-$branch_name
 ### 删除容器
-docker rm service-common-$branch_name### 运行镜像
+docker rm service-common-$branch_name
+### 运行镜像
 ## 运行
 docker run -itd  --name service-common-$branch_name  -p 8091:8091 service-common:1.0.0
