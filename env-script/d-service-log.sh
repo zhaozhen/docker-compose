@@ -23,6 +23,6 @@ docker stop $containId
 ### 删除容器
 docker rm $containId
 ### 运行镜像
-docker run -itd  --name service-log-$branch_name  -p 8096:8096 service-log:1.0.0
+docker run -itd  --name service-log-$branch_name  -p 8096:8096 service-log:1.0.0 &
 ## 查看日志
 docker logs service-log-$branch_name > /opt/logs/service-log.log

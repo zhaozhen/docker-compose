@@ -23,6 +23,6 @@ docker stop $containId
 ### 删除容器
 docker rm $containId
 ### 运行镜像
-docker run -itd  --name registry-$branch_name  -p 9999:9999 registry:1.0.0 $
+docker run -itd  --name registry-$branch_name  -p 9999:9999 registry:1.0.0 &
 ### 日志
 docker logs registry-$branch_name >> /opt/logs/registry.log

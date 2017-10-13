@@ -23,6 +23,6 @@ docker stop $containId
 ### 删除容器
 docker rm $containId
 ### 运行镜像
-docker run -itd  --name gateway-$branch_name  -p 8999:8999 gateway:1.0.0
+docker run -itd  --name gateway-$branch_name  -p 8999:8999 gateway:1.0.0 &
 ## 查看日志
 docker logs gateway-$branch_name > /opt/logs/gateway.log

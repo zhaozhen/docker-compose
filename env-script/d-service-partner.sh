@@ -24,6 +24,6 @@ docker stop $containId
 ### 删除容器
 docker rm $containId
 ### 运行镜像
-docker run -itd  --name service-partner-$branch_name  -p 8094:8094 service-partner:1.0.0
+docker run -itd  --name service-partner-$branch_name  -p 8094:8094 service-partner:1.0.0 &
 ## 查看日志
 docker logs service-partner-$branch_name > /opt/logs/service-partner.log
