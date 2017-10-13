@@ -50,8 +50,8 @@ RUN cp -a /usr/share/maven/ref/settings-docker.xml  /usr/share/maven/ref/setting
 RUN mkdir -p /opt/jar/release  \
     && mkdir -p /opt/jar/source \
     && mkdir -p /opt/logs  \
-    && mkdir -p /opt/script  \
-    && mkdir -p /opt/jar/source/maitao-cloud 
+    && mkdir -p /opt/script  
+    # && mkdir -p /opt/jar/source/maitao-cloud 
 
 
 COPY script/* /opt/script/
@@ -80,7 +80,7 @@ RUN  git config --global user.email "123@qq.com" \
   && git config --global user.name "maitao"
 
 ## 下载代码
-RUN cd  /opt/jar/source/maitao-cloud \
+RUN cd  /opt/jar/source \
     && echo y | /repo init -u  https://git.coding.net/maitao/maitao-manifest.git -b develop -m maitao-cloud_https.xml \
     && /repo  sync \
     && /repo start develop --all 

@@ -16,10 +16,14 @@ fi
 #打包该分支，如果没有改分支则使用develop进行打包
 docker exec -i my-build bash -c "cd /opt/jar/ && sh d-service-partner.sh $branch_name" 
 
+
 ##编译docker容器，并运行
+containId=`docker ps  -a | grep service-partner | awk   '{print $1}'`
 ### 停止容器
-docker stop service-partner-$branch_name
+docker stop $containId
 ### 删除容器
-docker rm service-partner-$branch_name
+docker rm $containId
 ### 运行镜像
 docker run -itd  --name service-partner-$branch_name  -p 8094:8094 service-partner:1.0.0
+## 查看日志
+docker logs service-partner-$branch_name > /opt/logs/service-partner.log

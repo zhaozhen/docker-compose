@@ -17,9 +17,12 @@ fi
 docker exec -i my-build bash -c "cd /opt/jar/ && sh d-gateway.sh $branch_name" 
 
 ##编译docker容器，并运行
+containId=`docker ps  -a | grep gateway | awk   '{print $1}'`
 ### 停止容器
-docker stop gateway-$branch_name
+docker stop $containId
 ### 删除容器
-docker rm gateway-$branch_name
+docker rm $containId
 ### 运行镜像
 docker run -itd  --name gateway-$branch_name  -p 8999:8999 gateway:1.0.0
+## 查看日志
+docker logs gateway-$branch_name > /opt/logs/gateway.log

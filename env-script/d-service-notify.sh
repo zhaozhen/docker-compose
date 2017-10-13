@@ -17,9 +17,12 @@ fi
 docker exec -i my-build bash -c "cd /opt/jar/ && sh d-service-notify.sh $branch_name" 
 
 ##编译docker容器，并运行
+containId=`docker ps  -a | grep service-notify | awk   '{print $1}'`
 ### 停止容器
-docker stop service-notify-$branch_name
+docker stop $containId
 ### 删除容器
-docker rm service-notify-$branch_name
+docker rm $containId
 ### 运行镜像
-docker run -itd  --name service-notify-$branch_name  -p 8095:8095 service-notify:1.0.0
+docker run -itd  --name service-notify-$branch_name  -p 8095:8095 service-notify:1.0.0 &
+## 查看日志
+docker logs service-notify-$branch_name > /opt/logs/service-notify.log

@@ -17,9 +17,12 @@ fi
 docker exec -i my-build bash -c "cd /opt/jar/ && sh d-config.sh $branch_name" 
 
 ##编译docker容器，并运行
+containId=`docker ps  -a | grep config | awk  '{print $1}'`
 ### 停止容器
-docker stop config-$branch_name
+docker stop $containId
 ### 删除容器
-docker rm config-$branch_name
+docker rm $containId
 ### 运行镜像
-docker run -itd  --name config-$branch_name  -p 8888:8888 config:1.0.0
+docker run -itd  --name config-$branch_name  -p 8888:8888 config:1.0.0 &
+
+docker logs config-$branch_name > /opt/logs/config.log

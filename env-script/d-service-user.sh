@@ -16,10 +16,14 @@ fi
 #打包该分支，如果没有改分支则使用develop进行打包
 docker exec -i my-build bash -c "cd /opt/jar/ && sh d-service-user.sh $branch_name" 
 
+
 ##编译docker容器，并运行
+containId=`docker ps  -a | grep service-user | awk   '{print $1}'`
 ### 停止容器
-docker stop service-user-$branch_name
+docker stop $containId
 ### 删除容器
-docker rm service-user-$branch_name 
+docker rm $containId
 ### 运行镜像
-docker run -itd  --name service-user-$branch_name  -p 8093:8093 service-user:1.0.0
+docker run -itd  --name service-user-$branch_name  -p 8093:8093 service-user:1.0.0 &
+## 查看日志
+docker logs service-user-$branch_name > /opt/logs/service-user.log

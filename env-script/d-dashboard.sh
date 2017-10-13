@@ -17,9 +17,12 @@ fi
 docker exec -i my-build bash -c "cd /opt/jar/ && sh d-dashboard.sh $branch_name" 
 
 ##编译docker容器，并运行
+containId=`docker ps  -a | grep dashboard | awk   '{print $1}'`
 ### 停止容器
-docker stop dashboard-$branch_name
+docker stop $containId
 ### 删除容器
-docker rm dashboard-$branch_name
+docker rm $containId
 ### 运行镜像
-docker run -itd  --name dashboard-$branch_name  -p 8806:8806 dashboard:1.0.0
+docker run -itd  --name dashboard-$branch_name  -p 8806:8806 dashboard:1.0.0 &
+## 查看日志
+docker logs dashboard-$branch_name > /opt/logs/dashboard.log

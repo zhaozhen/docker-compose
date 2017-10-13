@@ -17,9 +17,12 @@ fi
 docker exec -i my-build bash -c "cd /opt/jar/ && sh d-service.sh $branch_name" 
 
 ##编译docker容器，并运行
+containId=`docker ps  -a | grep service-server | awk   '{print $1}'`
 ### 停止容器
-docker stop service-$branch_name
+docker stop $containId
 ### 删除容器
-docker rm service-$branch_name
+docker rm $containId
 ### 运行镜像
-docker run -itd  --name service-$branch_name  -p 8866:8866 service:1.0.0
+docker run -itd  --name service-server-$branch_name  -p 8866:8866 service:1.0.0 &
+## 查看日志
+docker logs service-server-$branch_name > /opt/logs/service-server.log
