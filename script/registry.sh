@@ -29,7 +29,7 @@ if [ "$1" = "release" ]; then
   function_release_spring
 elif [ "$1" = "log" ]; then
   function_log_spring
-elif [ "$1" = "log" ]; then
+elif [ "$1" = "stop" ]; then
   function_stop_spring
 else
   printf "Usage: sh /opt/scripts/registry.sh {release|log|stop}\n"

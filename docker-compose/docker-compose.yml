@@ -10,7 +10,7 @@ services:
       - /home/LIVE/mysql/lib/data:/var/lib/mysql
       - /home/LIVE/mysql/conf/my.cnf:/etc/mysql/my.cnf
       - /home/LIVE/mysql/logs:/logs
-      - /home/LIVE/mysql/data:/mysql_data
+      - /home/LIVE/mysql/data:/usr/data
     environment:
       MYSQL_ROOT_PASSWORD : zhen
       MYSQL_DATABASE: maitao
@@ -54,6 +54,8 @@ services:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
       - RABBITMQ_DEFAULT_VHOST=/home/LIVE/rabbitmq/
+# Config file /etc/rabbitmq/rabbitmq.config
+# Database directory  /var/lib/rabbitmq/mnesia/rabbit@my-rabbit
 
   build: 
     container_name: my-build
