@@ -7,10 +7,9 @@ services:
     container_name: my-mysql
     hostname: my-mysql
     volumes:
-      - /home/LIVE/mysql/lib/data:/var/lib/mysql
-      - /home/LIVE/mysql/conf/my.cnf:/etc/mysql/my.cnf
-      - /home/LIVE/mysql/logs:/logs
-      - /home/LIVE/mysql/data:/usr/data
+      - /home/config/mysql/lib/data:/var/lib/mysql
+      - /home/config/mysql/logs:/logs
+      - /home/config/mysql/data:/usr/data
     environment:
       MYSQL_ROOT_PASSWORD : zhen
       MYSQL_DATABASE: maitao
@@ -25,18 +24,18 @@ services:
       - "6379:6379"
     hostname: my-redis
     volumes:
-      - /home/LIVE/redis/data:/data
+      - /home/config/redis/data:/data
 
   elasticsearch2.4.6:
-    image:  maitao-escluster:latest
+    image:  library/elasticsearch:2.4.6
     container_name: my-es 
     ports:
       - "9200:9200"
       - "9300:9300"
     volumes: 
-      - /home/LIVE/elasticsearch/data:/usr/share/elasticsearch/data
-      - /home/LIVE/elasticsearch/config:/usr/share/elasticsearch/config
-      - /home/LIVE/elasticsearch/logs:/usr/share/elasticsearch/logs
+      - /home/config/elasticsearch/data:/usr/share/elasticsearch/data
+      - /home/config/elasticsearch/config:/usr/share/elasticsearch/config
+      - /home/config/elasticsearch/logs:/usr/share/elasticsearch/logs
     hostname: my-es
 
   rabbitmq3.6.10:
@@ -56,7 +55,7 @@ services:
       - RABBITMQ_DEFAULT_VHOST=/home/LIVE/rabbitmq/
 # Config file /etc/rabbitmq/rabbitmq.config
 # Database directory  /var/lib/rabbitmq/mnesia/rabbit@my-rabbit
-
+# - /home/config/mysql/conf/my.cnf:/etc/mysql/my.cnf
   build: 
     container_name: my-build
     image:  daocloud.io/dasy/demo:test1
