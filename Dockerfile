@@ -50,15 +50,19 @@ RUN cp -a /usr/share/maven/ref/settings-docker.xml  /usr/share/maven/ref/setting
 RUN mkdir -p /opt/jar/release  \
     && mkdir -p /opt/jar/source \
     && mkdir -p /opt/logs  \
-    && mkdir -p /opt/script  
+    && mkdir -p /opt/script  \
+    && mkdir -p /opt/maitao
     # && mkdir -p /opt/jar/source/maitao-cloud 
 
 
-COPY script/* /opt/script/
-COPY jar/* /opt/jar/
+#COPY script/* /opt/script/
+#COPY jar/* /opt/jar/
+copy newScript/* /opt/maitao/
 
-RUN chmod +x  /opt/script/*
-RUN chmod +x /opt/jar/*
+RUN chmod +x /opt/maitao/*
+
+#RUN chmod +x  /opt/script/*
+#RUN chmod +x /opt/jar/*
 
 #git  下载文件准备
 RUN echo "https://zhen286339409:zz286339409@git.coding.net"  > ~/.git-credentials 

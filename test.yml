@@ -50,7 +50,8 @@ RUN cp -a /usr/share/maven/ref/settings-docker.xml  /usr/share/maven/ref/setting
 RUN mkdir -p /opt/jar/release  \
     && mkdir -p /opt/jar/source \
     && mkdir -p /opt/logs  \
-    && mkdir -p /opt/script  
+    && mkdir -p /opt/script  \
+    && mkdir -p /opt/maitao
     # && mkdir -p /opt/jar/source/maitao-cloud 
 
 
