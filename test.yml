@@ -24,7 +24,7 @@ RUN curl -o jce_policy-8.zip   ${JCE_URL}      \
     && mv UnlimitedJCEPolicyJDK8/*   /usr/java/jdk1.8.0_51/jre/lib/security/ 
 
 
-ARG MAVEN_VERSION=3.5.0
+ARG MAVEN_VERSION=3.5.3
 ARG USER_HOME_DIR="/root"
 ARG SHA=beb91419245395bd69a4a6edad5ca3ec1a8b64e41457672dc687c173a495f034
 ARG BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
@@ -57,10 +57,9 @@ RUN mkdir -p /opt/jar/release  \
 
 COPY script/* /opt/script/
 COPY jar/* /opt/jar/
-#COPY newScript/* /opt/maitao/
+COPY newScript/* /opt/maitao/
 
-#RUN chmod +x /opt/maitao/*
-
+RUN chmod +x /opt/maitao/*
 RUN chmod +x  /opt/script/*
 RUN chmod +x /opt/jar/*
 
