@@ -55,14 +55,14 @@ RUN mkdir -p /opt/jar/release  \
     # && mkdir -p /opt/jar/source/maitao-cloud 
 
 
-#COPY script/* /opt/script/
-#COPY jar/* /opt/jar/
-copy newScript/* /opt/maitao/
+COPY script/* /opt/script/
+COPY jar/* /opt/jar/
+#COPY newScript/* /opt/maitao/
 
-RUN chmod +x /opt/maitao/*
+#RUN chmod +x /opt/maitao/*
 
-#RUN chmod +x  /opt/script/*
-#RUN chmod +x /opt/jar/*
+RUN chmod +x  /opt/script/*
+RUN chmod +x /opt/jar/*
 
 #git  下载文件准备
 RUN echo "https://zhen286339409:zz286339409@git.coding.net"  > ~/.git-credentials 
@@ -77,6 +77,7 @@ RUN git config --global credential.helper store
 
 #新代码的下载方式
 RUN curl https://img.maitao.com/repo > repo  \
+
     && chmod a+x repo  
 
 ##repo配置需要
