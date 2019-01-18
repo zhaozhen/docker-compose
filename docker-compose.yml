@@ -1,0 +1,79 @@
+version: '3'
+services:
+
+  rabbit_3.7:
+    image: rabbitmq:3.7-management
+    hostname: rabbit
+    container_name: "rabbitmq_3_7"
+    restart: always
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=123456
+    volumes:
+      - ./data/rabbitmq:/var/lib/rabbitmq
+
+  redis_3:
+    image: redis:3
+    container_name: "redis3"
+    # command: redis-server --requirepass 123456 使用配置文件
+    restart: always
+    ports:
+      - 16379:6379
+    volumes: 
+      - ./data/redis:/data
+      - ./redis/redis.conf:/etc/redis.conf
+
+  mysql_5.7:
+    image: mysql:5.7.23
+    restart: always
+    container_name: "mysql_5_7"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_USER: guest
+      MYSQL_PASSWORD: guest
+    ports:
+      - 3307:3306
+    volumes: 
+      - ./data/mysql:/var/lib/mysql
+      - ./mysql/mymysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
+
+  postgresdb_9.6:
+    restart: always
+    image: postgres:9.6.2
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_PASSWORD: 123456
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data/pgdata
+
+  elasticsearch_6.5:
+    container_name: gs-search
+    image: daocloud.io/library/elasticsearch:6.5.4
+    volumes: 
+      - ./data/es6.5:/usr/share/elasticsearch/data
+      - ./es/es.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    environment:
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node
+    ports: 
+      - "9301:9300"
+      - "9201:9200"
+    networks:
+      - esnet
+  elasticsearch-head:
+    image: mobz/elasticsearch-head:5
+    container_name: elasticsearch-head
+    ports:
+      - 9101:9100
+    networks:
+      - esnet
+networks:
+  esnet:
+
+
