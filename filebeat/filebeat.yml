@@ -1,0 +1,25 @@
+filebeat:
+  prospectors:
+    - input_type: log
+      paths:  # 这里是容器内的path
+          - /tmp/test_log
+  registry_file: /usr/share/filebeat/data/registry/registry  # 这个文件记录日志读取的位置，如果容器重启，可以从记录的位置开始取日志
+
+output:
+  elasticsearch:  # 我这里是输出到elasticsearch，也可以输出到logstash
+    index: "test_filebeat"  #  kibana中的索引
+    hosts: ["elasticsearch:9200"] # elasticsearch地址
+
+ # filebeat:
+  #     image: docker.elastic.co/beats/filebeat:6.5.4
+  #     volumes:
+  #       - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+  #       - ./data/filebeat654:/tmp
+  #     container_name: filebeat654
+  #     hostname: filebeat
+  #     restart: always
+  #     privileged: true
+  #     networks:
+  #       - esnet
+  #     depends_on:
+  #       - elasticsearch
