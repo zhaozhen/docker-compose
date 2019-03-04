@@ -27,7 +27,7 @@ services:
       - ./redis/redis.conf:/etc/redis.conf
 
   mysql:
-    image: mysql:57.23
+    image: mysql:5.7.23
     restart: always
     container_name: "mysql57"
     environment:
