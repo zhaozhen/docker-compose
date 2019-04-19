@@ -34,7 +34,6 @@ services:
       - "9300:9300"
     volumes: 
       - /home/config/elasticsearch/data:/usr/share/elasticsearch/data
-      - /home/config/elasticsearch/config:/usr/share/elasticsearch/config
       - /home/config/elasticsearch/logs:/usr/share/elasticsearch/logs
     hostname: my-es
 
@@ -56,6 +55,7 @@ services:
 # Config file /etc/rabbitmq/rabbitmq.config
 # Database directory  /var/lib/rabbitmq/mnesia/rabbit@my-rabbit
 # - /home/config/mysql/conf/my.cnf:/etc/mysql/my.cnf
+# - /home/config/elasticsearch/config:/usr/share/elasticsearch/config
   build: 
     container_name: my-build
     image:  daocloud.io/dasy/demo:test1
